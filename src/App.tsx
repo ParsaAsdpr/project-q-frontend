@@ -1,8 +1,11 @@
+import Header from "./Components/Header/Header";
+
 function App() {
   return (
-    <>
-      <div className="w-full h-screen bg-red-400 text-2xl">laksnda</div>
-    </>
+    <div className="" dir="rtl">
+      <Header />
+      
+    </div>
   );
 }
 
