@@ -18,11 +18,11 @@ const NavItem = ({ text, icon, path, className }: Props) => {
           }`}
         >
           <span className="text-xl">{icon}</span>
-          <p className="text-[13px]">{text}</p>
+          <p className="text-[13px] hidden lg:block">{text}</p>
           <div
             className={`${
               isActive && " w-2"
-            } h-2 rounded-full bg-[#4ecc8b] absolute -bottom-3 left-1/2 -translate-x-1/2`}
+            } h-2 rounded-full bg-[#4ecc8b] absolute -bottom-4 left-1/2 -translate-x-1/2`}
           ></div>
         </div>
       )}
