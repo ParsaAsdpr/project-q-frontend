@@ -16,7 +16,7 @@ const HeaderTab = ({ text, activeTab, onClick }: Props) => {
       <span
         className={`${
           activeTab === text ? "w-full" : "w-0"
-        } duration-150 bg-[#47aa76] h-1 rounded-full absolute -bottom-2 md:-bottom-2.5 right-1/2 translate-x-1/2`}
+        } duration-150 bg-[#47aa76] h-1 rounded-t-full absolute -bottom-2 md:-bottom-2.5 right-1/2 translate-x-1/2`}
       ></span>
     </div>
   );

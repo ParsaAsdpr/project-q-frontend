@@ -23,7 +23,7 @@ const Navbar = () => {
     },
   ];
   return (
-    <div className="flex gap-1">
+    <nav className="flex gap-1">
       {navItems.map((item) => (
         <NavItem
           key={item.text}
@@ -33,7 +33,7 @@ const Navbar = () => {
           className={item.className}
         />
       ))}
-    </div>
+    </nav>
   );
 };
 

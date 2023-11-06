@@ -14,7 +14,7 @@ const Header = () => {
   };
 
   return (
-    <div className="flex flex-col w-full items-center">
+    <header className="flex flex-col w-full items-center bg-white">
       {/* TOP HEADER */}
       <div className="w-full border-b border-b-black border-opacity-10">
         <div className="w-full flex max-w-7xl justify-between mx-auto items-center px-3 relative">
@@ -54,7 +54,7 @@ const Header = () => {
           ))}
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 
