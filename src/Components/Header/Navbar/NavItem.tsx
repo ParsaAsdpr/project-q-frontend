@@ -14,8 +14,8 @@ const NavItem = ({ text, icon, path, className }: Props) => {
     <NavLink to={path} title={text}>
       {({ isActive }) => (
         <div
-          className={`${className} flex gap-1 px-4 items-center relative ${
-            isActive ? "text-black font-semibold" : "text-[#6e6e6e] font-normal"
+          className={`${className} flex gap-1 px-4 items-center relative transition ${
+            isActive ? "text-black font-semibold" : "text-[#6e6e6e] font-normal hover:text-[#3b3b3b]"
           }`}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
