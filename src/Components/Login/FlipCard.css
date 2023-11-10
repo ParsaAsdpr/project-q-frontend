@@ -1,0 +1,25 @@
+.flip-card-container { 
+    perspective: 800px;
+  }
+
+.flip-card {
+    transform-style: preserve-3d;
+    transition: transform 0.4s ease-out;
+  }
+  
+.flip-card section {
+    margin: 0;
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+  
+.flip-card .back {
+    transform: rotateY( 180deg );
+  }
+
+.flip-card.flipped {
+    transform: rotateY( 180deg );
+  }

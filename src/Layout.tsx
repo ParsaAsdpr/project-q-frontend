@@ -1,5 +1,6 @@
 import { useTitle } from "@/Hooks/useTitle";
-import Header from "@/Components/Header/Header";
+import Header from "@/Parts/Header";
+import Footer from "@/Parts/Footer";
 
 interface Props {
   children: React.ReactNode;
@@ -13,7 +14,8 @@ const Layout = ({ children, title, className }: Props) => {
   return (
     <div dir="rtl">
       <Header />
-      <div className={`mx-auto max-w-7xl pt-3 ${className}`}>{children}</div>
+      <div className={`mx-auto max-w-7xl pt-3 ${className} h-screen`}>{children}</div>
+      <Footer />
     </div>
   );
 };

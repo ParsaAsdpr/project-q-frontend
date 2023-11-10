@@ -1,13 +1,15 @@
 import React from "react";
-import Navbar from "./Navbar/Navbar";
-import NotificationsModal from "./NotificationsModal";
-import ProfileMenu from "./ProfileMenu";
-import SearchInput from "./SearchInput";
-import HeaderTab from "./HeaderTab";
+import Navbar from "../Components/Header/Navbar/Navbar";
+import NotificationsModal from "../Components/Header/NotificationsModal";
+import ProfileMenu from "../Components/Header/ProfileMenu";
+import SearchInput from "../Components/Header/SearchInput";
+import HeaderTab from "../Components/Header/HeaderTab";
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
   const [activeTab, setActiveTab] = React.useState<string>("برای شما");
   const tabs = ["برای شما", "پاسخ ها"];
+  const isLoggedIn = false;
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -36,7 +38,16 @@ const Header = () => {
           {/* LEFT SIDE */}
           <div className="flex items-center gap-3">
             <NotificationsModal />
-            <ProfileMenu name="محمد محمدی" avatar="https://i.pravatar.cc/300" />
+            {isLoggedIn ? (
+              <ProfileMenu
+                name="محمد محمدی"
+                avatar="https://i.pravatar.cc/300"
+              />
+            ) : (
+              <NavLink to="/login" className="text-center text-xs text-[#47b97d] hover:text-[#ffffff] border-[2.9px] border-[#47b97d] hover:bg-[#47b97d] px-3.5 py-2.5 rounded-full font-bold transition">
+                ورود / ثبت نام
+              </NavLink>
+            )}
           </div>
         </div>
       </div>
