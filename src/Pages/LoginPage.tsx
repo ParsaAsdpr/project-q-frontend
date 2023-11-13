@@ -1,7 +1,7 @@
 import { useState } from "react";
 import LoginForm from "@/Components/Login/LoginForm";
 import FlipCard from "@/Components/Login/FlipCard";
-import SignUpWizard from "@/Components/Login/SignUp/SignUpWizard";
+import SignUpForm from "@/Components/Login/SignUp/SignUpForm";
 
 const LoginPage = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -13,7 +13,7 @@ const LoginPage = () => {
       <FlipCard
         isFlipped={isSignUp}
         Front={<LoginForm className="-translate-y-1/2" onSignUpClick={() => setIsSignUp(!isSignUp)} />}
-        Back={<SignUpWizard className="-translate-y-1/2" onLoginClick={() => setIsSignUp(!isSignUp)} />}
+        Back={<SignUpForm className="-translate-y-1/2" onLoginClick={() => setIsSignUp(!isSignUp)} />}
       />
     </div>
   );
