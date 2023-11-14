@@ -37,7 +37,7 @@ const FormWrapper = ({
       <p className="text-[12px] text-[#777777] text-center leading-relaxed">
         {description}
       </p>
-      <div className="flex flex-col w-full gap-3 mt-2">
+      <div className="flex flex-col w-full gap-3 mt-3">
         {children}
 
         <button className="w-full text-[#fdfdfd] bg-[#47aa76] rounded-[3px] py-3 mt-2.5 hover:bg-[#3d9667] transition">

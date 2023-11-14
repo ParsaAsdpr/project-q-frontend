@@ -1,5 +1,16 @@
 import FormWrapper from "../common/FormWrapper";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod/dist/zod.js";
+import { z } from "zod";
+import InputWrapper from "../common/InputWrapper";
+
+const schema = z.object({
+  email: z
+    .string()
+    .min(7, { message: "ایمیل حداقل باید ۸ کاراکتر باشد" })
+    .email({ message: "ایمیل نامعتبر است" }),
+  password: z.string().min(8, { message: "رمز عبور حداقل باید ۸ کاراکتر باشد" }),
+});
 
 interface Props {
   onSignUpClick: () => void;
@@ -8,6 +19,7 @@ interface Props {
 
 interface IFormInput {
   email: string;
+  password: string;
 }
 
 const LoginForm = ({ onSignUpClick, className }: Props) => {
@@ -15,9 +27,12 @@ const LoginForm = ({ onSignUpClick, className }: Props) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data: IFormInput) =>
+  } = useForm<IFormInput>({ resolver: zodResolver(schema) });
+  const onSubmit: SubmitHandler<IFormInput> = (data: FieldValues) =>
     console.log(data);
+
+  const inputClass =
+    "w-full outline-none border border-[#dddddd] bg-[#f6f6f6] py-3 px-3 rounded-[3px] text-sm focus:border-[#47aa76] duration-300";
 
   return (
     <FormWrapper
@@ -28,16 +43,28 @@ const LoginForm = ({ onSignUpClick, className }: Props) => {
       title="ورود به حساب"
       description="برای ورود اطلاعات خود را در فیلد های زیر وارد کنید"
       canLoginWithGoogle
+      options={{text: "حسابی ندارید؟", linkText: "ثبت نام کنید", onClick: onSignUpClick}}
     >
-      <div>
+      <InputWrapper error={errors.email} id="email" text="ایمیل">
         <input
-          defaultValue=""
+          id="email"
           type="email"
-          placeholder="Example@email.com"
+          className={inputClass}
+          placeholder={"Example@email.com"}
+          dir="rtl"
           {...register("email", { required: true })}
         />
-        {errors.email && <span>This field is required</span>}
-      </div>
+      </InputWrapper>
+      <InputWrapper error={errors.password} id="password" text="رمز عبور">
+        <input
+          id="password"
+          type="password"
+          className={inputClass}
+          placeholder={"رمز عبور"}
+          dir="rtl"
+          {...register("password", { required: true })}
+        />
+      </InputWrapper>
     </FormWrapper>
   );
 };
