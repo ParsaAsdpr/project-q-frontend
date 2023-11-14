@@ -9,10 +9,10 @@ interface Props {
 const FlipCard = ({ Back, Front, isFlipped }: Props) => {
   return (
     <div
-      className={`flip-card-container relative w-[22%] bg-red-700`}
+      className={`flip-card-container relative w-full sm:w-[60%] md:w-[48%] lg:w-[36%] xl:w-[30%] 2xl:w-[23%]`}
     >
       <div
-        className={`flip-card w-full h-full absolute bg-red-600 ${isFlipped && "flipped"}`}
+        className={`flip-card w-full h-full absolute top-1/2 -translate-x-1/2 ${isFlipped && "flipped"}`}
         
       >
         <section className="front">{Front}</section>
