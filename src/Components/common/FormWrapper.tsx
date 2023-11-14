@@ -30,7 +30,7 @@ const FormWrapper = ({
 }: Props) => {
   return (
     <form
-      className={`w-full bg-white p-8 flex flex-col items-center rounded-lg shadow-lg ${className}`}
+      className={`w-full bg-white p-8 flex flex-col items-center justify-center rounded-lg shadow-lg h-full sm:h-auto ${className}`}
       onSubmit={handleSubmit}
     >
       <h1 className="py-3 text-[22px] text-[#282828] font-bold">{title}</h1>
