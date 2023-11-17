@@ -1,11 +1,11 @@
 .flip-card-container { 
-    perspective: 5000px;
+    perspective: 2500px;
   }
 
 .flip-card {
     transform-style: preserve-3d;
-    transition: transform ease-out;
-    @apply duration-0 sm:duration-500
+    transition: transform;
+    @apply duration-0 sm:duration-[0.4s] ease-out
   }
   
 .flip-card section {

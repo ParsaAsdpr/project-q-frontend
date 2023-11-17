@@ -1,34 +1,9 @@
 import FormWrapper from "@/Components/common/FormWrapper";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod/dist/zod.js";
-import { z } from "zod";
 import InputWrapper from "@/Components/common/InputWrapper";
+import { schema } from '@/utils/Schemas/SignupSchema'
 
-const schema = z
-  .object({
-    name: z.string().min(2, { message: "نام شما حداقل باید ۲ کاراکتر باشد" }),
-    username: z
-      .string()
-      .min(3, { message: "نام کاربری شما حداقل باید ۳ کاراکتر باشد" })
-      .refine(
-        (value) => /^[a-zA-Z0-9_.]+$/.test(value),
-        "نام کاربری معتبر نیست"
-      ),
-    email: z
-      .string()
-      .min(7, { message: "ایمیل حداقل باید ۷ کاراکتر باشد" })
-      .email({ message: "ایمیل نامعتبر است" }),
-    password: z
-      .string()
-      .min(8, { message: "رمز عبور حداقل باید ۸ کاراکتر باشد" }),
-    confirmPassword: z
-      .string()
-      .min(8, { message: "رمز عبور حداقل باید ۸ کاراکتر باشد" }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "رمز عبور باید یکی باشد",
-    path: ["confirmPassword"],
-  });
 // type formData = z.infer<typeof schema>;
 interface Props {
   className?: string;
@@ -36,11 +11,11 @@ interface Props {
 }
 
 interface IFormInput {
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
+  signup_name: string;
+  signup_username: string;
+  signup_email: string;
+  signup_password: string;
+  signup_confirmPassword: string;
 }
 
 const SignUpForm = ({ className, onLoginClick }: Props) => {
@@ -70,58 +45,58 @@ const SignUpForm = ({ className, onLoginClick }: Props) => {
       }}
     >
       <div className="w-full flex flex-row gap-3">
-        <InputWrapper error={errors.name} id="name" text="نام">
+        <InputWrapper error={errors.signup_name} id="name" text="نام">
           <input
-            id="name"
+            id="signup_name"
             className={inputClass}
             placeholder={"نام شما"}
             dir="rtl"
-            {...register("name")}
+            {...register("signup_name")}
           />
         </InputWrapper>
-        <InputWrapper error={errors.username} id="username" text="نام کاربری">
+        <InputWrapper error={errors.signup_username} id="login_username" text="نام کاربری">
           <input
-            id="username"
+            id="signup_username"
             className={inputClass}
             placeholder={"Username"}
             dir="rtl"
-            {...register("username")}
+            {...register("signup_username")}
           />
         </InputWrapper>
       </div>
-      <InputWrapper error={errors.email} id="email" text="ایمیل">
+      <InputWrapper error={errors.signup_email} id="signup_email" text="ایمیل">
         <input
-          id="email"
+          id="signup_email"
           type="email"
           className={inputClass}
           placeholder={"Example@email.com"}
           dir="rtl"
-          {...register("email")}
+          {...register("signup_email")}
         />
       </InputWrapper>
       <div className="w-full flex flex-row gap-3">
-        <InputWrapper error={errors.password} id="password" text="رمز عبور">
+        <InputWrapper error={errors.signup_password} id="signup_password" text="رمز عبور">
           <input
-            id="password"
+            id="signup_password"
             type="password"
             className={inputClass}
             placeholder={"رمز عبور"}
             dir="rtl"
-            {...register("password")}
+            {...register("signup_password")}
           />
         </InputWrapper>
         <InputWrapper
-          error={errors.confirmPassword}
-          id="confirmPassword"
+          error={errors.signup_confirmPassword}
+          id="signup_confirmPassword"
           text="تکرار رمز عبور"
         >
           <input
-            id="confirmPassword"
+            id="signup_confirmPassword"
             type="password"
             className={inputClass}
             placeholder={"رمز عبور"}
             dir="rtl"
-            {...register("confirmPassword")}
+            {...register("signup_confirmPassword")}
           />
         </InputWrapper>
       </div>

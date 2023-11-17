@@ -1,4 +1,4 @@
-import { useTitle } from "@/Hooks/useTitle";
+import { useTitle } from "@/utils/Hooks/useTitle";
 import Header from "@/Parts/Header";
 import Footer from "@/Parts/Footer";
 

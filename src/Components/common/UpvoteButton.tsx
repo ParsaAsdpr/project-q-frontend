@@ -1,4 +1,4 @@
-import useNumberFormatter from "@/Hooks/useNumberFormatter";
+import useNumberFormatter from "@/utils/Hooks/useNumberFormatter";
 import { toArabic } from "arabic-digits";
 
 interface Props {

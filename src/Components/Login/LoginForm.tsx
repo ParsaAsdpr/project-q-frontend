@@ -1,16 +1,8 @@
 import FormWrapper from "../common/FormWrapper";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod/dist/zod.js";
-import { z } from "zod";
 import InputWrapper from "../common/InputWrapper";
-
-const schema = z.object({
-  email: z
-    .string()
-    .min(7, { message: "ایمیل حداقل باید ۸ کاراکتر باشد" })
-    .email({ message: "ایمیل نامعتبر است" }),
-  password: z.string().min(8, { message: "رمز عبور حداقل باید ۸ کاراکتر باشد" }),
-});
+import { schema } from "@/utils/Schemas/LoginSchema";
 
 interface Props {
   onSignUpClick: () => void;
@@ -18,8 +10,8 @@ interface Props {
 }
 
 interface IFormInput {
-  email: string;
-  password: string;
+  login_email: string;
+  login_password: string;
 }
 
 const LoginForm = ({ onSignUpClick, className }: Props) => {
@@ -43,26 +35,34 @@ const LoginForm = ({ onSignUpClick, className }: Props) => {
       title="ورود به حساب"
       description="برای ورود اطلاعات خود را در فیلد های زیر وارد کنید"
       canLoginWithGoogle
-      options={{text: "حسابی ندارید؟", linkText: "ثبت نام کنید", onClick: onSignUpClick}}
+      options={{
+        text: "حسابی ندارید؟",
+        linkText: "ثبت نام کنید",
+        onClick: onSignUpClick,
+      }}
     >
-      <InputWrapper error={errors.email} id="email" text="ایمیل">
+      <InputWrapper error={errors.login_email} id="login_email" text="ایمیل">
         <input
-          id="email"
+          id="login_email"
           type="email"
           className={inputClass}
           placeholder={"Example@email.com"}
           dir="rtl"
-          {...register("email", { required: true })}
+          {...register("login_email")}
         />
       </InputWrapper>
-      <InputWrapper error={errors.password} id="password" text="رمز عبور">
+      <InputWrapper
+        error={errors.login_password}
+        id="login_password"
+        text="رمز عبور"
+      >
         <input
-          id="password"
+          id="login_password"
           type="password"
           className={inputClass}
           placeholder={"رمز عبور"}
           dir="rtl"
-          {...register("password", { required: true })}
+          {...register("login_password")}
         />
       </InputWrapper>
     </FormWrapper>

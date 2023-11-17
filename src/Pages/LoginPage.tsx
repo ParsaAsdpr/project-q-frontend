@@ -1,10 +1,12 @@
 import { useState } from "react";
 import LoginForm from "@/Components/Login/LoginForm";
 import FlipCard from "@/Components/Login/FlipCard";
-import SignUpForm from "@/Components/Login/SignUp/SignUpForm";
+import SignUpForm from "@/Components/Login/SignUpForm";
+import { useTitle } from "@/utils/Hooks/useTitle";
 
 const LoginPage = () => {
   const [isSignUp, setIsSignUp] = useState(false);
+  useTitle("ورود")
   return (
     <div
       className="h-screen w-full bg-[url('./assets/login-background.svg')] bg-fit flex items-center justify-center bg-no-repeat"
