@@ -1,8 +1,9 @@
 import FormWrapper from "@/Components/common/FormWrapper";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod/dist/zod.js";
 import InputWrapper from "@/Components/common/InputWrapper";
 import { schema } from '@/utils/Schemas/SignupSchema'
+import { registerUser } from "@/utils/Services/user.api";
 
 // type formData = z.infer<typeof schema>;
 interface Props {
@@ -24,8 +25,8 @@ const SignUpForm = ({ className, onLoginClick }: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>({ resolver: zodResolver(schema) });
-  const onSubmit: SubmitHandler<IFormInput> = (data: FieldValues) =>
-    console.log(data);
+  const onSubmit: SubmitHandler<IFormInput> = (data: IFormInput) =>
+    registerUser(data);
 
   const inputClass =
     "w-full outline-none border border-[#dddddd] bg-[#f6f6f6] py-3 px-3 rounded-[3px] text-sm focus:border-[#47aa76] duration-300";
@@ -59,7 +60,7 @@ const SignUpForm = ({ className, onLoginClick }: Props) => {
             id="signup_username"
             className={inputClass}
             placeholder={"Username"}
-            dir="rtl"
+            dir="ltr"
             {...register("signup_username")}
           />
         </InputWrapper>
@@ -70,7 +71,7 @@ const SignUpForm = ({ className, onLoginClick }: Props) => {
           type="email"
           className={inputClass}
           placeholder={"Example@email.com"}
-          dir="rtl"
+          dir="ltr"
           {...register("signup_email")}
         />
       </InputWrapper>

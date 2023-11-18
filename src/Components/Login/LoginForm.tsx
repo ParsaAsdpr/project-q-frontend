@@ -47,7 +47,7 @@ const LoginForm = ({ onSignUpClick, className }: Props) => {
           type="email"
           className={inputClass}
           placeholder={"Example@email.com"}
-          dir="rtl"
+          dir="ltr"
           {...register("login_email")}
         />
       </InputWrapper>

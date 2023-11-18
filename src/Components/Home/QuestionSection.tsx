@@ -6,7 +6,7 @@ interface Props {
 
 const QuestionSection = ({ avatar }: Props) => {
   return (
-    <SectionLayout className="flex flex-col w-full">
+    <SectionLayout className="flex flex-col w-full p-4">
       <div className="flex gap-3 items-center w-full">
         <img
           src={avatar}

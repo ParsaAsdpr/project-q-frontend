@@ -2,7 +2,7 @@ import SectionLayout from "../common/SectionLayout";
 import { useState } from "react";
 import UpvoteButton from "../common/UpvoteButton";
 import { NavLink } from "react-router-dom";
-import UserProfile from "../common/UserProfile";
+import UserProfile from "../Question/UserProfile";
 
 interface Props {
   name: string;
@@ -28,7 +28,7 @@ const PostPreview = ({ name, bio, avatar, title, answer }: Props) => {
       </div>
 
       <div className="flex flex-col">
-        <h2 className="text-[#222222] text-[17px] font-bold">{title}</h2>
+        <a className="text-[#444] text-[17px] font-bold hover:underline" href="/questions/6543f89fa27ebb2a968e9efa">{title}</a>
         {!isOpen && words.length > 60 ? (
           <p className="text-[14px] text-[#3f3f3f] leading-loose mt-2">
             {words.slice(0, 60).join(" ")}{" "}

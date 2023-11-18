@@ -1,13 +1,13 @@
 import { LiaHomeSolid } from "react-icons/lia";
 import { PiArticle } from "react-icons/pi";
-import { MdOutlineCategory } from "react-icons/md";
+import { MdOutlineCategory, MdOutlineQuestionAnswer } from "react-icons/md";
 import NavItem from "./NavItem";
 
 const Navbar = () => {
   const navItems = [
     {
       text: "خانه",
-      path: "/",
+      path: "/feed",
       icon: <LiaHomeSolid />,
     },
     {
@@ -20,6 +20,11 @@ const Navbar = () => {
       text: "دسته بندی ها",
       path: "/categories",
       icon: <MdOutlineCategory />,
+    },
+    {
+      text: "پاسخ ها",
+      path: "/answers",
+      icon: <MdOutlineQuestionAnswer />,
     },
   ];
   return (

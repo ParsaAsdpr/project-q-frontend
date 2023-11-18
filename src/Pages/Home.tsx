@@ -15,7 +15,7 @@ function Home() {
   })
 
   return (
-    <Layout title="خانه" className="grid grid-cols-12 gap-3">
+    <Layout title="خانه" className="grid grid-cols-12 gap-3 max-w-7xl">
       {/* RIGHT SIDE */}
       <CategoriesSidebar
         categories={categories}

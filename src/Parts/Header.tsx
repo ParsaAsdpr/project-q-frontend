@@ -1,19 +1,11 @@
-import React from "react";
 import Navbar from "../Components/Header/Navbar/Navbar";
 import NotificationsModal from "../Components/Header/NotificationsModal";
 import ProfileMenu from "../Components/Header/ProfileMenu";
 import SearchInput from "../Components/Header/SearchInput";
-import HeaderTab from "../Components/Header/HeaderTab";
 import { NavLink } from "react-router-dom";
 
 const Header = () => {
-  const [activeTab, setActiveTab] = React.useState<string>("برای شما");
-  const tabs = ["برای شما", "پاسخ ها"];
   const isLoggedIn = false;
-
-  const handleTabClick = (tab: string) => {
-    setActiveTab(tab);
-  };
 
   return (
     <header className="flex flex-col w-full items-center bg-white">
@@ -49,20 +41,6 @@ const Header = () => {
               </NavLink>
             )}
           </div>
-        </div>
-      </div>
-
-      {/* BOTTOM HEADER */}
-      <div className="w-full border-b border-b-black border-opacity-10 py-2 md:py-2.5 flex justify-center items-center">
-        <div className="flex gap-8">
-          {tabs.map((tab) => (
-            <HeaderTab
-              key={tab}
-              activeTab={activeTab}
-              text={tab}
-              onClick={() => handleTabClick(tab)}
-            />
-          ))}
         </div>
       </div>
     </header>
