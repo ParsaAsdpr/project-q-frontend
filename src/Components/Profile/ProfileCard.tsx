@@ -3,7 +3,7 @@ import ProfilePicture from "./ProfilePicture";
 
 const ProfileCard = () => {
   return (
-    <div className="grid grid-cols-2 mt-4 bg-[#f8f8f8] p-5 rounded-xl items-center">
+    <div className="grid grid-cols-2 mt-4 bg-[#f8f8f8] p-6 rounded-xl items-center">
       {/* LEFT SIDE */}
       <div className="flex gap-1.5 ">
         <ProfilePicture />
@@ -29,10 +29,10 @@ const ProfileCard = () => {
           {/* USER STATS */}
           <p className="text-[#888] text-[14px] mx-2 py-0.5">برنامه نویس</p>
           <div className="flex mt-2">
-            <a className="text-[#555] hover:underline text-[14px] mx-2 cursor-pointer">
+            <a className="text-[#44a573] hover:underline text-[14px] mx-2 cursor-pointer">
               ۲ دنبال کننده
             </a>
-            <a className="text-[#555] hover:underline text-[14px] mx-2 cursor-pointer">
+            <a className="text-[#44a573] hover:underline text-[14px] mx-2 cursor-pointer">
               ۵ دنبال شونده
             </a>
           </div>

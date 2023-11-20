@@ -16,6 +16,7 @@ import Categories from "./Pages/Categories.tsx";
 import Profile from "./Pages/Profile.tsx";
 
 
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
