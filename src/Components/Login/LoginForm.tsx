@@ -1,12 +1,16 @@
 import FormWrapper from "../common/FormWrapper";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod/dist/zod.js";
 import InputWrapper from "../common/InputWrapper";
 import { schema } from "@/utils/Schemas/LoginSchema";
+import { login } from "@/utils/Services/auth.api";
+import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   onSignUpClick: () => void;
   className?: string;
+  isSignUp: boolean;
 }
 
 interface IFormInput {
@@ -14,14 +18,31 @@ interface IFormInput {
   login_password: string;
 }
 
-const LoginForm = ({ onSignUpClick, className }: Props) => {
+const LoginForm = ({ onSignUpClick, className, isSignUp }: Props) => {
+  const navigate = useNavigate();
+
+  const handleLogin = async (data: IFormInput) => {
+    if (isSignUp) return;
+    try {
+      const { data: jwt } = await login(data);
+
+      localStorage.setItem("token", jwt);
+      navigate("/feed");
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status === 400) {
+        alert(e.response.data?.message);
+        console.log(e.response.data?.message);
+      }
+    }
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>({ resolver: zodResolver(schema) });
-  const onSubmit: SubmitHandler<IFormInput> = (data: FieldValues) =>
-    console.log(data);
+  const onSubmit: SubmitHandler<IFormInput> = (data: IFormInput) =>
+    handleLogin(data);
 
   const inputClass =
     "w-full outline-none border border-[#dddddd] bg-[#f6f6f6] py-3 px-3 rounded-[3px] text-sm focus:border-[#47aa76] duration-300";

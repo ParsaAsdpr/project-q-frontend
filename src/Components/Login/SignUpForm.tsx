@@ -2,13 +2,15 @@ import FormWrapper from "@/Components/common/FormWrapper";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod/dist/zod.js";
 import InputWrapper from "@/Components/common/InputWrapper";
-import { schema } from '@/utils/Schemas/SignupSchema'
+import { schema } from "@/utils/Schemas/SignupSchema";
 import { registerUser } from "@/utils/Services/user.api";
+import { useNavigate } from "react-router-dom";
 
 // type formData = z.infer<typeof schema>;
 interface Props {
   className?: string;
   onLoginClick: () => void;
+  isSignUp: boolean;
 }
 
 interface IFormInput {
@@ -19,14 +21,30 @@ interface IFormInput {
   signup_confirmPassword: string;
 }
 
-const SignUpForm = ({ className, onLoginClick }: Props) => {
+const SignUpForm = ({ className, onLoginClick, isSignUp }: Props) => {
+  const navigate = useNavigate();
+
+  const handleSignUp = async (data: IFormInput) => {
+    if (!isSignUp) return;
+    try {
+      const res = await registerUser(data);
+      localStorage.setItem("token", res.headers["x-auth-token"]);
+      navigate("/feed");
+    } catch (e) {
+      if (e.response.status === 400) {
+        alert(e.response);
+        console.log(e);
+      }
+    }
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>({ resolver: zodResolver(schema) });
   const onSubmit: SubmitHandler<IFormInput> = (data: IFormInput) =>
-    registerUser(data);
+    handleSignUp(data);
 
   const inputClass =
     "w-full outline-none border border-[#dddddd] bg-[#f6f6f6] py-3 px-3 rounded-[3px] text-sm focus:border-[#47aa76] duration-300";
@@ -55,7 +73,11 @@ const SignUpForm = ({ className, onLoginClick }: Props) => {
             {...register("signup_name")}
           />
         </InputWrapper>
-        <InputWrapper error={errors.signup_username} id="login_username" text="نام کاربری">
+        <InputWrapper
+          error={errors.signup_username}
+          id="login_username"
+          text="نام کاربری"
+        >
           <input
             id="signup_username"
             className={inputClass}
@@ -76,7 +98,11 @@ const SignUpForm = ({ className, onLoginClick }: Props) => {
         />
       </InputWrapper>
       <div className="w-full flex flex-row gap-3">
-        <InputWrapper error={errors.signup_password} id="signup_password" text="رمز عبور">
+        <InputWrapper
+          error={errors.signup_password}
+          id="signup_password"
+          text="رمز عبور"
+        >
           <input
             id="signup_password"
             type="password"

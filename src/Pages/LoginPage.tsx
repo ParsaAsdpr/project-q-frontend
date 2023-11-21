@@ -23,8 +23,8 @@ const LoginPage = () => {
     >
       <FlipCard
         isFlipped={isSignUp}
-        Front={<LoginForm className="-translate-y-1/2" onSignUpClick={() => setIsSignUp(!isSignUp)} />}
-        Back={<SignUpForm className="-translate-y-1/2" onLoginClick={() => setIsSignUp(!isSignUp)} />}
+        Front={<LoginForm className="-translate-y-1/2" onSignUpClick={() => setIsSignUp(!isSignUp)} isSignUp={isSignUp} />}
+        Back={<SignUpForm className="-translate-y-1/2" onLoginClick={() => setIsSignUp(!isSignUp)} isSignUp={isSignUp} />}
       />
     </motion.div>
   );

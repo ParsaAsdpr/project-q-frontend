@@ -14,8 +14,7 @@ import NotFound from "./Pages/NotFound.tsx";
 import Question from "./Pages/Question.tsx";
 import Categories from "./Pages/Categories.tsx";
 import Profile from "./Pages/Profile.tsx";
-
-
+import Logout from "./Pages/Logout.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -26,6 +25,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/questions" element={<Questions />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/categories" element={<Categories />} />
+        <Route path="/logout" element={<Logout />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/questions/:id" element={<Question />} />
         <Route path="/" element={<Navigate to="/feed" replace />} />

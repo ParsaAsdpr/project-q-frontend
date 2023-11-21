@@ -3,9 +3,13 @@ import NotificationsModal from "../Components/Header/NotificationsModal";
 import ProfileMenu from "../Components/Header/ProfileMenu";
 import SearchInput from "../Components/Header/SearchInput";
 import { NavLink } from "react-router-dom";
+import { UserContext } from "@/utils/Contexts/UserContext";
+import { useContext } from "react";
 
 const Header = () => {
-  const isLoggedIn = false;
+  const user = useContext(UserContext);
+  
+  const isLoggedIn = user ? true : false;
 
   return (
     <header className="flex flex-col w-full items-center bg-white">
@@ -32,7 +36,7 @@ const Header = () => {
             <NotificationsModal />
             {isLoggedIn ? (
               <ProfileMenu
-                name="محمد محمدی"
+                name={user.name ?? ''}
                 avatar="https://i.pravatar.cc/300"
               />
             ) : (

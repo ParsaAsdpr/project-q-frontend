@@ -2,17 +2,17 @@ import CategoriesSidebar from "@/Components/Home/CategoriesSidebar";
 import PostPreview from "@/Components/Home/PostPreview";
 import QuestionSection from "@/Components/Home/QuestionSection";
 import Layout from "@/Layout";
-import axios from "axios";
+// import axios from "axios";
 
 function Home() {
   const categories = ["رایانه", "علمی", "فناوری", "فرهنگی", "ورزشی"];
   const activeCategory = "رایانه";
 
-  axios.get("http://localhost:5000/api/questions").then((res) => {
-    console.log(res.data);
-  }).catch((err) => {
-    console.log(err)
-  })
+  // axios.get("http://localhost:5000/api/questions").then((res) => {
+  //   console.log(res.data);
+  // }).catch((err) => {
+  //   console.log(err)
+  // })
 
   return (
     <Layout title="خانه" className="grid grid-cols-12 gap-3 max-w-7xl">
