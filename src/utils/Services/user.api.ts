@@ -1,7 +1,7 @@
 import http from "./httpService";
 import { apiUrl } from "@/config.json";
 
-const apiEndpoint = apiUrl + "/users";
+const apiEndpoint = apiUrl + "/api/users";
 
 interface signupInterface {
   signup_name: string;

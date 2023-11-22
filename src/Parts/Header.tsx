@@ -5,6 +5,7 @@ import SearchInput from "../Components/Header/SearchInput";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "@/utils/Contexts/UserContext";
 import { useContext } from "react";
+import {apiUrl} from '@/config.json'
 
 const Header = () => {
   const user = useContext(UserContext);
@@ -36,8 +37,8 @@ const Header = () => {
             <NotificationsModal />
             {isLoggedIn ? (
               <ProfileMenu
-                name={user.name ?? ''}
-                avatar="https://i.pravatar.cc/300"
+                name={user.profile?.name ?? ''}
+                avatar={`${apiUrl}${user.profile?.profile_picture ?? ''}`}
               />
             ) : (
               <NavLink to="/login" className="text-center text-xs text-[#47b97d] hover:text-[#ffffff] border-[2.9px] border-[#47b97d] hover:bg-[#47b97d] px-3.5 py-2.5 rounded-full font-bold transition">

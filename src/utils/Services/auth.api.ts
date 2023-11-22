@@ -2,7 +2,7 @@ import { jwtDecode } from "jwt-decode";
 import http from "./httpService";
 import { apiUrl } from "@/config.json";
 
-const apiEndpoint = apiUrl + "/login";
+const apiEndpoint = apiUrl + "/api/login";
 const tokenKey = "token";
 
 interface loginInterface {
@@ -29,7 +29,7 @@ const logout = () => {
 const getCurrentUser = () => {
   try {
     const jwt = localStorage.getItem(tokenKey);
-    return jwt ? jwtDecode(jwt) : ""; // Set user to an empty object if jwt is null or undefined
+    return jwt ? jwtDecode(jwt) : "";
   } catch (e) {
     console.log(e);
   }

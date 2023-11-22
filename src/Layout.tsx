@@ -2,10 +2,7 @@ import { useTitle } from "@/utils/Hooks/useTitle";
 import Header from "@/Parts/Header";
 import Footer from "@/Parts/Footer";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 import { UserContextProvider } from "./utils/Contexts/UserContext";
-import authApi from "./utils/Services/auth.api";
-import { UserTypes } from "./types/UserTypes";
 
 interface Props {
   children: React.ReactNode;
@@ -16,23 +13,10 @@ interface Props {
 
 
 const Layout = ({ children, title, className }: Props) => {
-  const [user, setUser] = useState<UserTypes>({
-    id: "",
-    name: "",
-    username: "",
-    email: "",
-    isAdmin: false,
-  });
   useTitle(title);
 
-useEffect(() => {
-  const decodedToken = authApi.getCurrentUser();
-  console.log(decodedToken); // Add this line
-  setUser(decodedToken);
-}, []);
-
   return (
-    <UserContextProvider value={user}>
+    <UserContextProvider>
       <motion.div
         dir="rtl"
         initial="hidden"

@@ -1,8 +1,13 @@
 import { BiEdit } from "react-icons/bi";
 import { useState } from "react";
 import ChangeAvatarModal from "./ChangeAvatarModal";
+import {apiUrl} from '@/config.json'
 
-const ProfilePicture = () => {
+interface Props {
+  imageUrl: string;
+}
+
+const ProfilePicture = ({imageUrl}: Props) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleModalClose = () => {
@@ -18,7 +23,7 @@ const ProfilePicture = () => {
         <p className="text-white">تغییر</p>
       </div>
       <img
-        src="https://i.pravatar.cc/300"
+        src={`${apiUrl}${imageUrl}`}
         alt="profile"
         className="w-full h-full object-cover"
         />
