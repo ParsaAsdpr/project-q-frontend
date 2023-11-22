@@ -15,20 +15,23 @@ import Question from "./Pages/Question.tsx";
 import Categories from "./Pages/Categories.tsx";
 import Profile from "./Pages/Profile.tsx";
 import Logout from "./Pages/Logout.tsx";
+import authApi from "./utils/Services/auth.api.ts";
+
+const user = authApi.getCurrentUser();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="*" element={<NotFound />} />
+        <Route index element={<Navigate to="/feed" replace />} />
         <Route path="/feed" element={<Home />} />
         <Route path="/questions" element={<Questions />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/feed" replace />} />
         <Route path="/categories" element={<Categories />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/logout" element={<Logout />}  />
+        <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" replace />} />
         <Route path="/questions/:id" element={<Question />} />
-        <Route path="/" element={<Navigate to="/feed" replace />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

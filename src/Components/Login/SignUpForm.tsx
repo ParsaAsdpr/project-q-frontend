@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod/dist/zod.js";
 import InputWrapper from "@/Components/common/InputWrapper";
 import { schema } from "@/utils/Schemas/SignupSchema";
 import { registerUser } from "@/utils/Services/user.api";
-import { useNavigate } from "react-router-dom";
+import authApi from "@/utils/Services/auth.api";
 
 // type formData = z.infer<typeof schema>;
 interface Props {
@@ -22,14 +22,13 @@ interface IFormInput {
 }
 
 const SignUpForm = ({ className, onLoginClick, isSignUp }: Props) => {
-  const navigate = useNavigate();
 
   const handleSignUp = async (data: IFormInput) => {
     if (!isSignUp) return;
     try {
       const res = await registerUser(data);
-      localStorage.setItem("token", res.headers["x-auth-token"]);
-      navigate("/feed");
+      authApi.loginWithJwt(res.headers["x-auth-token"]);
+      window.location.href = "/feed";
     } catch (e) {
       if (e.response.status === 400) {
         alert(e.response);

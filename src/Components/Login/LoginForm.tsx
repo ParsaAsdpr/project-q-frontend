@@ -3,9 +3,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod/dist/zod.js";
 import InputWrapper from "../common/InputWrapper";
 import { schema } from "@/utils/Schemas/LoginSchema";
-import { login } from "@/utils/Services/auth.api";
+import authApi from "@/utils/Services/auth.api";
 import { AxiosError } from "axios";
-import { useNavigate } from "react-router-dom";
 
 interface Props {
   onSignUpClick: () => void;
@@ -19,15 +18,12 @@ interface IFormInput {
 }
 
 const LoginForm = ({ onSignUpClick, className, isSignUp }: Props) => {
-  const navigate = useNavigate();
 
   const handleLogin = async (data: IFormInput) => {
     if (isSignUp) return;
     try {
-      const { data: jwt } = await login(data);
-
-      localStorage.setItem("token", jwt);
-      navigate("/feed");
+      await authApi.login(data);
+      window.location.href = "/feed"
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status === 400) {
         alert(e.response.data?.message);

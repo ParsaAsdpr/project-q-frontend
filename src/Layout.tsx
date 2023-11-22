@@ -3,8 +3,9 @@ import Header from "@/Parts/Header";
 import Footer from "@/Parts/Footer";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { jwtDecode } from "jwt-decode";
-import { UserContext } from "./utils/Contexts/UserContext";
+import { UserContextProvider } from "./utils/Contexts/UserContext";
+import authApi from "./utils/Services/auth.api";
+import { UserTypes } from "./types/UserTypes";
 
 interface Props {
   children: React.ReactNode;
@@ -12,23 +13,26 @@ interface Props {
   className?: string;
 }
 
+
+
 const Layout = ({ children, title, className }: Props) => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<UserTypes>({
+    id: "",
+    name: "",
+    username: "",
+    email: "",
+    isAdmin: false,
+  });
   useTitle(title);
 
-  useEffect(() => {
-    try {
-      const jwt = localStorage.getItem("token");
-      const decoded = jwt ? jwtDecode(jwt) : ""; // Set user to an empty object if jwt is null or undefined
-
-      setUser(decoded);
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
+useEffect(() => {
+  const decodedToken = authApi.getCurrentUser();
+  console.log(decodedToken); // Add this line
+  setUser(decodedToken);
+}, []);
 
   return (
-    <UserContext.Provider value={user}>
+    <UserContextProvider value={user}>
       <motion.div
         dir="rtl"
         initial="hidden"
@@ -50,7 +54,7 @@ const Layout = ({ children, title, className }: Props) => {
         </div>
         <Footer />
       </motion.div>
-    </UserContext.Provider>
+    </UserContextProvider>
   );
 };
 

@@ -1,11 +1,18 @@
 import ProfileCard from "@/Components/Profile/ProfileCard";
 import SectionLayout from "@/Components/common/SectionLayout";
 import Layout from "@/Layout";
-import { useState } from "react";
+import { UserContext } from "@/utils/Contexts/UserContext";
+import { useContext, useEffect, useState } from "react";
 
 const Profile = () => {
   const tabs = ["سوال ها", "جواب ها", "پست ها", "فعالیت ها"];
   const [activeTab, setActiveTab] = useState("سوال ها");
+  const user = useContext(UserContext);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+  
   return (
     <Layout title="پروفایل">
       <SectionLayout className="p-5 px-6 flex flex-col rounded-lg">

@@ -1,3 +1,4 @@
+import AuthApi from '@/utils/Services/auth.api';
 import {useEffect} from 'react';
 
 const Logout = () => {
@@ -6,7 +7,7 @@ const Logout = () => {
         try{
             const token = localStorage.getItem("token");
             if(token){
-                localStorage.removeItem("token");
+                AuthApi.logout();
                 window.location.href = "/feed";
             }
         }catch(e) {

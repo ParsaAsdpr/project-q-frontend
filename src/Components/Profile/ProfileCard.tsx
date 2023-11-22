@@ -1,6 +1,7 @@
 import { BiEdit } from "react-icons/bi";
 import ProfilePicture from "./ProfilePicture";
 
+
 const ProfileCard = () => {
   return (
     <div className="grid grid-cols-2 mt-4 bg-[#f8f8f8] p-6 rounded-xl items-center">
