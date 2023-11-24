@@ -2,6 +2,7 @@ import { BiEdit } from "react-icons/bi";
 import ProfilePicture from "./ProfilePicture";
 import { useContext } from "react";
 import { UserContext } from "@/utils/Contexts/UserContext";
+import { Link } from "react-router-dom";
 
 const ProfileCard = () => {
   const user = useContext(UserContext);
@@ -25,12 +26,12 @@ const ProfileCard = () => {
                 @{user.username}
               </p>
             </div>
-            <a
+            <Link
               className="text-[#787878] hover:text-[#555] transition cursor-pointer text-lg"
-              href="#"
+              to="/edit-profile"
             >
               <BiEdit />
-            </a>
+            </Link>
           </div>
 
           {/* USER STATS */}

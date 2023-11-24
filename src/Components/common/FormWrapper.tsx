@@ -4,7 +4,7 @@ import GoogleButton from "../Login/GoogleButton";
 interface Props {
   className?: string;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  onOptionClick: () => void;
+  onOptionClick?: () => void;
   submitText: string;
   title: string;
   description: string;

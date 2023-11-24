@@ -10,6 +10,8 @@ interface loginInterface {
   login_password: string;
 }
 
+http.setJwt(localStorage.getItem(tokenKey) ?? "");
+
 const login = async (data: loginInterface) => {
   const { data: jwt } = await http.post(apiEndpoint, {
     email: data.login_email,
@@ -39,5 +41,5 @@ export default {
   login,
   logout,
   getCurrentUser,
-  loginWithJwt
+  loginWithJwt,
 };

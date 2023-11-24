@@ -1,10 +1,19 @@
+// import { useState } from "react";
 import SectionLayout from "../common/SectionLayout";
+import { FileUploader } from "react-drag-drop-files";
+
+const fileTypes = ["JPG", "PNG", "GIF"];
 
 interface Props {
   onClick: () => void;
 }
 
 const ChangeAvatarModal = ({ onClick }: Props) => {
+  // const [file, setFile] = useState<File>();
+  const handleChange = (file: File) => {
+    // setFile(file);
+    console.log(file);
+  };
   return (
     <>
       <div
@@ -12,7 +21,11 @@ const ChangeAvatarModal = ({ onClick }: Props) => {
         onClick={onClick}
       ></div>
       <SectionLayout className="p-10 fixed z-50 bottom-1/2 right-1/2 translate-x-1/2">
-        p
+        <FileUploader
+          handleChange={handleChange}
+          name="file"
+          types={fileTypes}
+        />
       </SectionLayout>
     </>
   );

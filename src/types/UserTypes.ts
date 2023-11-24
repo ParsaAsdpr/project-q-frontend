@@ -1,10 +1,10 @@
-interface Profile {
+export interface ProfileTypes {
   name: string;
   bio: string;
-  profile_picture: string;
+  profile_picture?: string;
   job: string;
   website: string;
-  social_links: [
+  social_links?: [
     {
       platform: string;
       url: string;
@@ -13,9 +13,9 @@ interface Profile {
 }
 
 export interface UserTypes {
-  id: string;
+  _id: string;
   username: string;
   email: string;
-  profile: Profile;
+  profile: ProfileTypes;
   isAdmin: boolean;
 }

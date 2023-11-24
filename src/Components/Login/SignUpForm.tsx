@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod/dist/zod.js";
 import InputWrapper from "@/Components/common/InputWrapper";
 import { schema } from "@/utils/Schemas/SignupSchema";
-import { registerUser } from "@/utils/Services/user.api";
+import userApi from "@/utils/Services/user.api";
 import authApi from "@/utils/Services/auth.api";
 
 // type formData = z.infer<typeof schema>;
@@ -26,7 +26,7 @@ const SignUpForm = ({ className, onLoginClick, isSignUp }: Props) => {
   const handleSignUp = async (data: IFormInput) => {
     if (!isSignUp) return;
     try {
-      const res = await registerUser(data);
+      const res = await userApi.registerUser(data);
       authApi.loginWithJwt(res.headers["x-auth-token"]);
       window.location.href = "/feed";
     } catch (e) {

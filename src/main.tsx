@@ -16,6 +16,7 @@ import Categories from "./Pages/Categories.tsx";
 import Profile from "./Pages/Profile.tsx";
 import Logout from "./Pages/Logout.tsx";
 import authApi from "./utils/Services/auth.api.ts";
+import EditProfile from "./Pages/EditProfile.tsx";
 
 const user = authApi.getCurrentUser();
 
@@ -28,8 +29,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/questions" element={<Questions />} />
         <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/feed" replace />} />
         <Route path="/categories" element={<Categories />} />
-        <Route path="/logout" element={<Logout />}  />
+        <Route path="/logout" element={user ? <Logout /> : <Navigate to="/feed" replace />}  />
         <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" replace />} />
+        <Route path="/edit-profile" element={user ? <EditProfile /> : <Navigate to="/feed" replace />} />
         <Route path="/questions/:id" element={<Question />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
