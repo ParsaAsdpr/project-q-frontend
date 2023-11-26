@@ -1,6 +1,8 @@
-// import { useState } from "react";
+import uploadApi from "@/utils/Services/upload.api";
 import SectionLayout from "../common/SectionLayout";
 import { FileUploader } from "react-drag-drop-files";
+import authApi from "@/utils/Services/auth.api";
+import { UserTypes } from "@/types/UserTypes";
 
 const fileTypes = ["JPG", "PNG", "GIF"];
 
@@ -8,10 +10,23 @@ interface Props {
   onClick: () => void;
 }
 
+const decodedToken = authApi.getCurrentUser();
+const user: UserTypes = decodedToken as UserTypes;
+
 const ChangeAvatarModal = ({ onClick }: Props) => {
-  // const [file, setFile] = useState<File>();
-  const handleChange = (file: File) => {
-    // setFile(file);
+  const handleChange = async (file: File) => {
+    const formData = new FormData();
+    formData.append("avatar", file);
+
+    try {
+      const res = await uploadApi.upload(user._id, formData);
+
+      authApi.logout();
+      authApi.loginWithJwt(res.headers["x-auth-token"]);
+      window.location.href = "/profile";
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
     console.log(file);
   };
   return (
