@@ -3,6 +3,7 @@ import SectionLayout from "../common/SectionLayout";
 import { FileUploader } from "react-drag-drop-files";
 import authApi from "@/utils/Services/auth.api";
 import { UserTypes } from "@/types/UserTypes";
+import { toast } from "react-toastify";
 
 interface Props {
   onClick: () => void;
@@ -25,10 +26,12 @@ const ChangeAvatarModal = ({ onClick }: Props) => {
       authApi.logout();
       authApi.loginWithJwt(res.headers["x-auth-token"]);
       window.location.href = "/profile";
+      
     } catch (error) {
-      console.error("Error uploading file:", error);
+      toast("خطایی هنگام ارسال فایل رخ داده است", {
+        type: "error",
+      });
     }
-    console.log(file);
   };
   return (
     <>

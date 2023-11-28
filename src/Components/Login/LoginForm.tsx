@@ -5,6 +5,7 @@ import InputWrapper from "../common/InputWrapper";
 import { schema } from "@/utils/Schemas/LoginSchema";
 import authApi from "@/utils/Services/auth.api";
 import { AxiosError } from "axios";
+import { toast } from "react-toastify";
 
 interface Props {
   onSignUpClick: () => void;
@@ -26,8 +27,15 @@ const LoginForm = ({ onSignUpClick, className, isSignUp }: Props) => {
       window.location.href = "/feed"
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status === 400) {
-        alert(e.response.data?.message);
-        console.log(e.response.data?.message);
+        toast(e.response.data, {
+          type: "error",
+        });
+        console.log(e);
+      }
+      else {
+        toast("خطایی رخ داده است", {
+          type: "error",
+        });
       }
     }
   };

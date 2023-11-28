@@ -4,6 +4,8 @@ import FlipCard from "@/Components/Login/FlipCard";
 import SignUpForm from "@/Components/Login/SignUpForm";
 import { useTitle } from "@/utils/Hooks/useTitle";
 import {motion} from 'framer-motion'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginPage = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -21,6 +23,7 @@ const LoginPage = () => {
         hidden: { opacity: 0, scale: 0.98 }
       }}
     >
+      <ToastContainer />
       <FlipCard
         isFlipped={isSignUp}
         Front={<LoginForm className="-translate-y-1/2" onSignUpClick={() => setIsSignUp(!isSignUp)} isSignUp={isSignUp} />}

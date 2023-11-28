@@ -5,6 +5,8 @@ import InputWrapper from "@/Components/common/InputWrapper";
 import { schema } from "@/utils/Schemas/SignupSchema";
 import userApi from "@/utils/Services/user.api";
 import authApi from "@/utils/Services/auth.api";
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
 
 // type formData = z.infer<typeof schema>;
 interface Props {
@@ -30,9 +32,15 @@ const SignUpForm = ({ className, onLoginClick, isSignUp }: Props) => {
       authApi.loginWithJwt(res.headers["x-auth-token"]);
       window.location.href = "/feed";
     } catch (e) {
-      if (e.response.status === 400) {
-        alert(e.response);
-        console.log(e);
+      if (e instanceof AxiosError && e.response?.status === 400) {
+        toast(e.response.data?.message, {
+          type: "error",
+        });
+      }
+      else {
+        toast("خطایی رخ داده است", {
+          type: "error",
+        });
       }
     }
   };
