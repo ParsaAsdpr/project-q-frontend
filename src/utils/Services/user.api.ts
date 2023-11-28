@@ -29,6 +29,10 @@ const registerUser = (data: signupInterface) => {
   });  
 };
 
+const getUser = (username: string) => {
+  return http.get(`${apiEndpoint}/${username}`);
+};
+
 const editUser = async (data: editProfileInterface, userId: string) => {
   try {
     const response = await http.put(`${apiEndpoint}/${userId}`, data);
@@ -44,4 +48,5 @@ const editUser = async (data: editProfileInterface, userId: string) => {
 export default {
   registerUser,
   editUser,
+  getUser
 };

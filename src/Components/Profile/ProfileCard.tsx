@@ -1,17 +1,22 @@
 import { BiEdit } from "react-icons/bi";
 import ProfilePicture from "./ProfilePicture";
+import { Link } from "react-router-dom";
+import { UserTypes } from "@/types/UserTypes";
 import { useContext } from "react";
 import { UserContext } from "@/utils/Contexts/UserContext";
-import { Link } from "react-router-dom";
 
-const ProfileCard = () => {
-  const user = useContext(UserContext);
+interface Props {
+  user: UserTypes;
+}
 
+const ProfileCard = ({ user }: Props) => {
+  const currentUser = useContext(UserContext)
+  
   return (
     <div className="grid grid-cols-2 mt-4 bg-[#f8f8f8] p-6 rounded-xl items-center">
       {/* LEFT SIDE */}
       <div className="flex gap-1.5 ">
-        <ProfilePicture imageUrl={user.profile?.profile_picture ?? ''} />
+        <ProfilePicture imageUrl={user.profile?.profile_picture ?? ''} currentUsername={currentUser.username ?? ''} />
         <div className="flex flex-col justify-center flex-grow">
           {/* USER INFO */}
           <div className="flex items-center justify-between pl-10">
@@ -26,12 +31,15 @@ const ProfileCard = () => {
                 @{user.username}
               </p>
             </div>
+            {
+              currentUser &&  currentUser.username === user.username &&
             <Link
               className="text-[#787878] hover:text-[#555] transition cursor-pointer text-lg"
               to="/edit-profile"
             >
               <BiEdit />
             </Link>
+            }
           </div>
 
           {/* USER STATS */}

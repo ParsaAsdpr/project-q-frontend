@@ -23,7 +23,7 @@ const PostPreview = ({ user, title, answer }: Props) => {
   return (
     <SectionLayout className="flex flex-col gap-4 px-8 py-5">
       <div className="flex gap-2 items-center justify-between">
-        <UserProfile name={user.profile.name} bio={user.profile.bio} avatar={user.profile.profile_picture} />
+        <UserProfile name={user.profile.name} job={user.profile.job} avatar={user.profile.profile_picture} username={user.username} />
         {/* LEFT SIDE */}
         <div>
           <p className="text-[#7d7d7d] text-[10px]">۵ سال پیش</p>

@@ -1,11 +1,31 @@
 import ProfileCard from "@/Components/Profile/ProfileCard";
 import SectionLayout from "@/Components/common/SectionLayout";
 import Layout from "@/Layout";
-import { useState } from "react";
+import { UserTypes } from "@/types/UserTypes";
+import userApi from "@/utils/Services/user.api";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import {toast} from "react-toastify";
+import {AxiosError} from "axios";
 
 const Profile = () => {
+  const { username = "" } = useParams();
   const tabs = ["سوال ها", "جواب ها", "پست ها", "فعالیت ها"];
   const [activeTab, setActiveTab] = useState("سوال ها");
+  const [user, setUser] = useState<UserTypes>({} as UserTypes);
+
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const { data } = await userApi.getUser(username);
+        setUser(data);
+      } catch (e) {
+        if(e instanceof AxiosError && e.response?.status === 404) window.location.href = "/404";
+        else toast
+      }
+    }
+    fetchUser();
+  }, [username]);
 
   return (
     <Layout title="پروفایل">
@@ -13,7 +33,7 @@ const Profile = () => {
         <h1 className="text-[24px] font-bold text-[#222] px-3 pt-2">
           اطلاعات حساب
         </h1>
-        <ProfileCard />
+        <ProfileCard user={user as UserTypes} />
 
         <div className="grid grid-cols-3 gap-3">
           <div className="flex gap-3 mt-5 mx-2 border-b border-b-[#f5f5f5] col-span-2">

@@ -44,8 +44,9 @@ const Question = () => {
         <div className="flex gap-2 items-center justify-between">
           <UserProfile
             name={"پارسا"}
-            bio={"لورم ایپسوم متن ساختگی با تولید سادگی"}
+            job={"لورم ایپسوم متن ساختگی با تولید سادگی"}
             avatar={"https://i.pravatar.cc/300"}
+            username={"parsa"}
           />
           <div>
             <p className="text-[#7d7d7d] text-[10px]">۵ سال پیش</p>
