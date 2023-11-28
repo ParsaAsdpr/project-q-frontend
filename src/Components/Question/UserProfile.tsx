@@ -1,3 +1,5 @@
+import {apiUrl} from '@/config.json'
+
 interface Props{
     name: string;
     bio: string;
@@ -8,9 +10,9 @@ const UserProfile = ({bio, name, avatar}: Props) => {
     return (
         <div className="flex gap-2 items-center">
           <img
-            src={avatar}
+            src={`${apiUrl}${avatar}`}
             alt="profile picture"
-            className="rounded-full w-10 h-10 overflow-hidden"
+            className="rounded-full w-12 h-12 overflow-hidden"
           />
           <div className="flex flex-col gap-0.5">
             <div className="flex gap-2 items-center">

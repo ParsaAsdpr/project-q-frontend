@@ -3,6 +3,8 @@ import Header from "@/Parts/Header";
 import Footer from "@/Parts/Footer";
 import { motion } from "framer-motion";
 import { UserContextProvider } from "./utils/Contexts/UserContext";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Props {
   children: React.ReactNode;
@@ -17,6 +19,7 @@ const Layout = ({ children, title, className }: Props) => {
 
   return (
     <UserContextProvider>
+      <ToastContainer />
       <motion.div
         dir="rtl"
         initial="hidden"
@@ -30,7 +33,7 @@ const Layout = ({ children, title, className }: Props) => {
       >
         <Header />
         <div
-          className={`mx-auto pt-3 h-screen ${
+          className={`mx-auto pt-3 min-h-screen ${
             className ? className : "max-w-7xl"
           }`}
         >

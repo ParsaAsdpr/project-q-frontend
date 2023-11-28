@@ -1,15 +1,15 @@
+import { useContext } from "react";
 import SectionLayout from "../common/SectionLayout";
+import { UserContext } from "@/utils/Contexts/UserContext";
+import {apiUrl} from '@/config.json'
 
-interface Props {
-  avatar: string;
-}
-
-const QuestionSection = ({ avatar }: Props) => {
+const QuestionSection = () => {
+  const {profile} = useContext(UserContext);
   return (
     <SectionLayout className="flex flex-col w-full p-4">
       <div className="flex gap-3 items-center w-full">
         <img
-          src={avatar}
+          src={`${apiUrl}${profile?.profile_picture ?? ''}`}
           alt="profile picture"
           className="rounded-full w-10 h-10"
         />

@@ -4,8 +4,6 @@ import { FileUploader } from "react-drag-drop-files";
 import authApi from "@/utils/Services/auth.api";
 import { UserTypes } from "@/types/UserTypes";
 
-const fileTypes = ["JPG", "PNG", "GIF"];
-
 interface Props {
   onClick: () => void;
 }
@@ -13,7 +11,10 @@ interface Props {
 const decodedToken = authApi.getCurrentUser();
 const user: UserTypes = decodedToken as UserTypes;
 
+const fileTypes = ["JPG", "PNG", "GIF"];
+
 const ChangeAvatarModal = ({ onClick }: Props) => {
+
   const handleChange = async (file: File) => {
     const formData = new FormData();
     formData.append("avatar", file);

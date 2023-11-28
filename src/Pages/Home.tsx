@@ -1,18 +1,44 @@
 import CategoriesSidebar from "@/Components/Home/CategoriesSidebar";
 import PostPreview from "@/Components/Home/PostPreview";
 import QuestionSection from "@/Components/Home/QuestionSection";
+import QuestionPageLoading from "@/Components/Question/QuestionPageLoading";
 import Layout from "@/Layout";
-// import axios from "axios";
+import AnswerTypes from "@/types/AnswerTypes";
+import { UserTypes } from "@/types/UserTypes";
+import { getAnswers } from "@/utils/Services/answer.api";
+import authApi from "@/utils/Services/auth.api";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 function Home() {
   const categories = ["رایانه", "علمی", "فناوری", "فرهنگی", "ورزشی"];
   const activeCategory = "رایانه";
+  const [answers, setAnswers] = useState<AnswerTypes[]>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
-  // axios.get("http://localhost:5000/api/questions").then((res) => {
-  //   console.log(res.data);
-  // }).catch((err) => {
-  //   console.log(err)
-  // })
+  const decodedToken = authApi.getCurrentUser();
+  const user: UserTypes = decodedToken as UserTypes;
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const { data } = await getAnswers();
+        setAnswers(data);
+        setIsLoading(false);
+      } catch (error) {
+        if (!toast.isActive("errorToast")) {
+          toast("خطایی رخ داده است", {
+            type: "error",
+            toastId: "errorToast",
+          });
+        }
+        setIsError(true);
+        setIsLoading(false);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <Layout title="خانه" className="grid grid-cols-12 gap-3 max-w-7xl">
@@ -24,25 +50,27 @@ function Home() {
       />
 
       {/* CENTER */}
-      <div className="flex flex-col col-span-8 self-start gap-3 ">
-        <QuestionSection avatar="https://i.pravatar.cc/300" />
-        <PostPreview
-          name="پارسا"
-          avatar="https://i.pravatar.cc/300"
-          bio="لورم ایپسوم متن ساختگی با تولید سادگی "
-          title="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت "
-          answer="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد 
-          "
-        />
-        <PostPreview
-          name="پارسا"
-          avatar="https://i.pravatar.cc/300"
-          bio="لورم ایپسوم متن ساختگی با تولید سادگی "
-          title="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت "
-          answer="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک 
-          "
-        />
+      <div className="flex flex-col col-span-8 self-start gap-3">
+        {user && <QuestionSection />}
+        {isError && (
+          <div className="flex-col flex mx-auto justify-center items-center gap-4 mt-10">
+            <img src="/500.svg" alt="" className="w-1/3" />
+            <p className="text-[#333] text-xl font-bold mt-8">خطایی رخ داده است</p>
+            <a className="py-2 px-4 bg-[#59dc98] text-white hover:bg-[#49b67e] transition rounded-[3px]" href="/feed">تلاش مجدد</a>
+          </div>
+        )}
+        {isLoading && !isError ? (
+          <QuestionPageLoading />
+        ) : (
+          answers?.map((answer) => (
+            <PostPreview
+              key={answer._id}
+              user={answer.user}
+              title={answer.question.title}
+              answer={answer.body}
+            />
+          ))
+        )}
       </div>
 
       {/* LEFT SIDE */}

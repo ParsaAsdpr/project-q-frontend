@@ -4,7 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes LoadingElementAnimation {
+  from {background-color: #eee;}
+  to {background-color: #e4e4e4;}
+}
+
 body {
   font-family: "IRANYekan", sans-serif;
   background-color: #F6F6F6;
+}
+
+.loading-element{
+  animation: LoadingElementAnimation 0.6s ease-out infinite alternate-reverse;
 }

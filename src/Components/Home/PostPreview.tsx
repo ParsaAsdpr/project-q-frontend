@@ -3,16 +3,19 @@ import { useState } from "react";
 import UpvoteButton from "../common/UpvoteButton";
 import { NavLink } from "react-router-dom";
 import UserProfile from "../Question/UserProfile";
+import { ProfileTypes } from "@/types/UserTypes";
 
 interface Props {
-  name: string;
-  bio: string;
-  avatar: string;
+  user: {
+    _id: string;
+    username: string;
+    profile: ProfileTypes;
+  }
   title: string;
   answer: string;
 }
 
-const PostPreview = ({ name, bio, avatar, title, answer }: Props) => {
+const PostPreview = ({ user, title, answer }: Props) => {
   const [isOpen, setOpen] = useState<boolean>(false);
 
   const words = answer.split(" ");
@@ -20,7 +23,7 @@ const PostPreview = ({ name, bio, avatar, title, answer }: Props) => {
   return (
     <SectionLayout className="flex flex-col gap-4 px-8 py-5">
       <div className="flex gap-2 items-center justify-between">
-        <UserProfile name={name} bio={bio} avatar={avatar} />
+        <UserProfile name={user.profile.name} bio={user.profile.bio} avatar={user.profile.profile_picture} />
         {/* LEFT SIDE */}
         <div>
           <p className="text-[#7d7d7d] text-[10px]">۵ سال پیش</p>

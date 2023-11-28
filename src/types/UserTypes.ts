@@ -1,7 +1,7 @@
 export interface ProfileTypes {
   name: string;
   bio: string;
-  profile_picture?: string;
+  profile_picture: string;
   job: string;
   website: string;
   social_links?: [
