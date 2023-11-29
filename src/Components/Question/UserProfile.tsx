@@ -11,7 +11,7 @@ interface Props {
 const UserProfile = ({ job, name, avatar, username }: Props) => {
   return (
     <div className="flex gap-2 items-center">
-      <Link to={`/profile/${username}`}>
+      <Link to={`/profile/${username}`} target="_blank">
         <img
           src={`${apiUrl}${avatar}`}
           alt="profile picture"

@@ -21,7 +21,7 @@ const Profile = () => {
         setUser(data);
       } catch (e) {
         if(e instanceof AxiosError && e.response?.status === 404) window.location.href = "/404";
-        else toast
+        else toast("خطایی رخ داده است", { type: "error" });
       }
     }
     fetchUser();

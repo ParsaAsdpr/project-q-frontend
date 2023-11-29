@@ -1,18 +1,20 @@
 import SectionLayout from "@/Components/common/SectionLayout";
-import AnswerActions from "@/Components/Question/AnswerActions";
-import UserProfile from "@/Components/Question/UserProfile";
+import AnswerCard from "@/Components/Question/AnswerCard";
 import Layout from "@/Layout";
+import AnswerTypes from "@/types/AnswerTypes";
+import { useTitle } from "@/utils/Hooks/useTitle";
 import { getQuestion } from "@/utils/Services/questions.api";
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface QuestionInterface {
   _id: string;
-  user_id: string;
   title: string;
-  body: string;
-  timestamp: string;
+  answers: AnswerTypes[];
   tags: string[];
+  timestamp: string;
   __v: number;
 }
 
@@ -22,45 +24,41 @@ const Question = () => {
 
   useEffect(() => {
     const getData = async (id: string | undefined) => {
-      if (id) {
-        const data = await getQuestion(id);
-        setQuestion(data.data);
+      try {
+        if (id) {
+          const data = await getQuestion(id);
+          setQuestion(data.data);
+        }
+      } catch (e) {
+        if (
+          (e instanceof AxiosError && e.response?.status === 404) ||
+          (e instanceof AxiosError && e.response?.status === 500) ||
+          (e instanceof AxiosError && e.response?.status === 400)
+        )
+          window.location.href = "/404";
+        else toast("خطایی رخ داده است", { type: "error" });
       }
     };
 
     getData(id);
   }, [id, setQuestion]);
 
-  useEffect(() => {
-    console.log(question);
-  }, [question]);
+  useTitle(question?.title ?? "");
+
   return (
     <Layout title={"Question.title"} className="max-w-4xl flex flex-col gap-3">
       <SectionLayout className="px-8 py-4">
         <h1 className="text-[19px] font-bold text-[#444]">{question?.title}</h1>
       </SectionLayout>
 
-      <SectionLayout className="flex flex-col gap-4 px-8 py-7">
-        <div className="flex gap-2 items-center justify-between">
-          <UserProfile
-            name={"پارسا"}
-            job={"لورم ایپسوم متن ساختگی با تولید سادگی"}
-            avatar={"https://i.pravatar.cc/300"}
-            username={"parsa"}
-          />
-          <div>
-            <p className="text-[#7d7d7d] text-[10px]">۵ سال پیش</p>
-          </div>
-        </div>
-
-        <div className="flex flex-col">
-          <p className="text-[14px] text-[#3f3f3f] leading-loose">
-            {question?.body}
-          </p>
-        </div>
-
-        <AnswerActions answersCount={43} upvotes={1400} />
-      </SectionLayout>
+      {question?.answers.map((answer, index) => (
+        <AnswerCard
+          key={answer._id}
+          data={answer}
+          answersCount={question?.answers.length}
+          currentAnswer={index + 1}
+        />
+      ))}
     </Layout>
   );
 };

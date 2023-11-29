@@ -38,7 +38,7 @@ function Home() {
       }
     }
     fetchData();
-  }, []);
+  }, []);  
 
   return (
     <Layout title="خانه" className="grid grid-cols-12 gap-3 max-w-7xl">
@@ -65,9 +65,7 @@ function Home() {
           answers?.map((answer) => (
             <PostPreview
               key={answer._id}
-              user={answer.user}
-              title={answer.question.title}
-              answer={answer.body}
+              data={answer}
             />
           ))
         )}

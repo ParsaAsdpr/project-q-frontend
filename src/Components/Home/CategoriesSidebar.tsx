@@ -10,7 +10,7 @@ interface Props{
 
 const CategoriesSidebar = ({className, categories, activeCategory}: Props) => {
   return (
-    <SectionLayout className={`${className} flex flex-col px-6 gap-5 self-start`}>
+    <SectionLayout className={`${className} flex flex-col px-6 gap-5 self-start pt-3`}>
       <div className="flex my-1.5 items-center text-[#464646] justify-between">
         <div className="flex items-center gap-1">
           <MdOutlineCategory className="text-base" />
