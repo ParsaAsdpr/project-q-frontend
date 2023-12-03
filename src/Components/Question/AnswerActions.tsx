@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import UpvoteButton from "../common/UpvoteButton";
 import { toArabic } from "arabic-digits";
 
@@ -14,9 +13,9 @@ const AnswerActions = ({answersCount, upvotes, currentAnswer}: Props) => {
           <div className="flex gap-3">
             <UpvoteButton upvotes={upvotes} />
           </div>
-          <NavLink className="hover:underline mt-2" to="/">
+          <p className="hover:underline mt-2">
             جواب {toArabic(currentAnswer)} از {toArabic(answersCount)}
-          </NavLink>
+          </p>
         </div>
 
     );

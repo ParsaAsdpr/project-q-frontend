@@ -15,7 +15,8 @@ const ProfileMenu = ({ name, avatar }: Props) => {
 
   return (
     <div
-      className="rounded-full border border-black border-opacity-10 p-0.5 flex items-center gap-2 cursor-pointer relative"
+      className="rounded-full border border-black border-opacity-10 hover:border-[#59dc98] hover:border-opacity-100 duration-300 
+      p-0.5 flex items-center gap-2 cursor-pointer relative"
       onClick={() => setShowModal(!showModal)}
     >
       <img
@@ -35,6 +36,7 @@ const ProfileMenu = ({ name, avatar }: Props) => {
           <SectionLayout className="p-0 absolute z-50 top-[calc(100%+4px)] flex flex-col w-full text-center py-1">
             <Link
               to={`/profile/${user.username}`}
+              target="_blank"
               className="text-[#333] text-sm w-full hover:bg-black/5 py-1.5"
             >
               پروفایل

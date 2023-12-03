@@ -3,10 +3,20 @@ import {apiUrl} from '@/config.json'
 
 const apiEndpoint = apiUrl + "/api/answers";
 
-export const getAnswers = () => {
+const getAnswers = () => {
     return http.get(apiEndpoint);
 }
 
-export const getAnswer = (id: string) => {
+const getAnswer = (id: string) => {
     return http.get(`${apiEndpoint}/${id}`);
+}
+
+const postAnswer = (id: string) => {
+    return http.get(`${apiEndpoint}/${id}`);
+}
+
+export default {
+    getAnswers,
+    getAnswer,
+    postAnswer
 }

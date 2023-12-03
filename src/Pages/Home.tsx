@@ -1,14 +1,14 @@
-import CategoriesSidebar from "@/Components/Home/CategoriesSidebar";
-import PostPreview from "@/Components/Home/PostPreview";
-import QuestionSection from "@/Components/Home/QuestionSection";
-import QuestionPageLoading from "@/Components/Question/QuestionPageLoading";
-import Layout from "@/Layout";
-import AnswerTypes from "@/types/AnswerTypes";
-import { UserTypes } from "@/types/UserTypes";
-import { getAnswers } from "@/utils/Services/answer.api";
-import authApi from "@/utils/Services/auth.api";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import authApi from "@/utils/Services/auth.api";
+import answerApi from "@/utils/Services/answer.api";
+import AnswerTypes from "@/types/AnswerTypes";
+import { UserTypes } from "@/types/UserTypes";
+import CategoriesSidebar from "@/Components/Home/CategoriesSidebar";
+import PostPreview from "@/Components/Home/PostPreview";
+import QuestionBox from "@/Components/Home/QuestionBox";
+import QuestionPageLoading from "@/Components/Question/QuestionPageLoading";
+import Layout from "@/Layout";
 
 function Home() {
   const categories = ["رایانه", "علمی", "فناوری", "فرهنگی", "ورزشی"];
@@ -23,7 +23,7 @@ function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const { data } = await getAnswers();
+        const { data } = await answerApi.getAnswers();
         setAnswers(data);
         setIsLoading(false);
       } catch (error) {
@@ -51,7 +51,7 @@ function Home() {
 
       {/* CENTER */}
       <div className="flex flex-col col-span-8 self-start gap-3">
-        {user && <QuestionSection />}
+        {user && <QuestionBox />}
         {isError && (
           <div className="flex-col flex mx-auto justify-center items-center gap-4 mt-10">
             <img src="/500.svg" alt="" className="w-1/3" />

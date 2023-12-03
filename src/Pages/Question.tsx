@@ -3,7 +3,7 @@ import AnswerCard from "@/Components/Question/AnswerCard";
 import Layout from "@/Layout";
 import AnswerTypes from "@/types/AnswerTypes";
 import { useTitle } from "@/utils/Hooks/useTitle";
-import { getQuestion } from "@/utils/Services/questions.api";
+import questionsApi from "@/utils/Services/questions.api";
 import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -26,7 +26,7 @@ const Question = () => {
     const getData = async (id: string | undefined) => {
       try {
         if (id) {
-          const data = await getQuestion(id);
+          const data = await questionsApi.getQuestion(id);
           setQuestion(data.data);
         }
       } catch (e) {
